@@ -1,7 +1,7 @@
 %define Docs paraguidoc-html-1.1.8
 %define	name	paragui
 %define	version	1.1.8
-%define	release	%mkrel 12
+%define	release	%mkrel 13
 
 %define lib_name_orig libparagui
 %define lib_major 1.1
