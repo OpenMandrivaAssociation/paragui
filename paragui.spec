@@ -1,7 +1,7 @@
 %define Docs paraguidoc-html-1.1.8
 %define	name	paragui
 %define	version	1.1.8
-%define	release	%mkrel 13
+%define	release	%mkrel 14
 
 %define lib_name_orig libparagui
 %define lib_major 1.1
@@ -99,5 +99,3 @@ rm -rf %{buildroot}
 %{_libdir}/pkgconfig/%{name}.pc
 %{_datadir}/aclocal/*.m4
 %{_datadir}/%{name}
-
-
