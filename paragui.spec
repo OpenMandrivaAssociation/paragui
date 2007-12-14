@@ -66,7 +66,7 @@ applications which will use paragui, a GUI on top of SDL.
 %build
 # TODO : --enable-python --enable-ruby
 aclocal-1.8
-autoconf-2.5x 
+autoconf 
 automake-1.8 --foreign
 %configure2_5x --enable-unicode
 make
