@@ -27,6 +27,7 @@ BuildRequires:	libsigc++1.2-devel
 BuildRequires:	libexpat-devel
 BuildRequires:	multiarch-utils >= 1.0.3
 BuildRequires:	automake1.8
+BuildRoot:	%{_tmppath}/%{name}-%{version}
 
 %description
 ParaGUI is a cross-platform high-level application framework and GUI
