@@ -1,11 +1,12 @@
 %define Docs paraguidoc-html-1.1.8
 %define	name	paragui
 %define	version	1.1.8
-%define	release	%mkrel 14
+%define	release	%mkrel 15
 
 %define lib_name_orig libparagui
-%define lib_major 1.1
-%define lib_name %mklibname %{name} %{lib_major}
+%define lib_api 1.1
+%define lib_major 8
+%define lib_name %mklibname %{name} %{lib_api} %{lib_major}
 
 Name:		%{name}
 Version:	%{version}
@@ -17,6 +18,8 @@ Source0:	http://savannah.nongnu.org/download/paragui/%{name}-%{version}.tar.bz2
 Source1:        http://savannah.nongnu.org/download/paraguidoc-html-1.1.8.tar.bz2
 Patch0:		%{name}-1.1.8.install.patch
 Patch1:		paragui-1.1.8-fix-underquoted-calls.patch
+Patch2:		paragui-1.1.8-asneeded.patch
+Patch3:		paragui-1.1.8-header.patch
 URL:		http://www.bms-austria.com/projects/paragui/
 BuildRequires:	freetype2-devel
 BuildRequires:	physfs-devel
@@ -61,13 +64,14 @@ applications which will use paragui, a GUI on top of SDL.
 %setup -q -n %{name}-%{version} -a1
 %patch0 -p1
 %patch1 -p1 -b .underquoted
-
+%patch2 -p0
+%patch3 -p0
 
 %build
 # TODO : --enable-python --enable-ruby
-aclocal-1.8
+aclocal
 autoconf 
-automake-1.8 --foreign
+automake --foreign
 %configure2_5x --enable-unicode
 make
 
