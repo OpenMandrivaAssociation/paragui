@@ -81,8 +81,12 @@ rm -rf %{buildroot}
 rm -f %{buildroot}%{_libdir}/lib%{name}.a
 %multiarch_binaries %{buildroot}%{_bindir}/paragui-config
 
+%if %mdkversion < 200900
 %post -n %{lib_name} -p /sbin/ldconfig
+%endif
+%if %mdkversion < 200900
 %postun -n %{lib_name} -p /sbin/ldconfig
+%endif
 
 %clean
 rm -rf %{buildroot}
