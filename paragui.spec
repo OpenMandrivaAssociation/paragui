@@ -3,10 +3,10 @@
 %define	version	1.1.8
 %define	release	%mkrel 15
 
-%define lib_name_orig libparagui
 %define lib_api 1.1
 %define lib_major 8
 %define lib_name %mklibname %{name} %{lib_api} %{lib_major}
+%define develname %mklibname -d paragui
 
 Name:		%{name}
 Version:	%{version}
@@ -20,6 +20,8 @@ Patch0:		%{name}-1.1.8.install.patch
 Patch1:		paragui-1.1.8-fix-underquoted-calls.patch
 Patch2:		paragui-1.1.8-asneeded.patch
 Patch3:		paragui-1.1.8-header.patch
+Patch4:		020_stl_map.diff
+Patch5:		paragui-1.1.8-remove-physfs.patch
 URL:		http://www.bms-austria.com/projects/paragui/
 BuildRequires:	freetype2-devel
 BuildRequires:	physfs-devel
@@ -40,21 +42,20 @@ completely based on the Simple DirectMedia Layer (SDL).
 %package -n	%{lib_name}
 Summary:	Main library for paragui
 Group:		System/Libraries
-Provides:	%{lib_name_orig} = %{version}-%{release}
 Provides:	%{name} = %{version}-%{release}
 
 %description -n	%{lib_name}
 This package contains the library needed to run programs dynamically
 linked with paragui.
 
-%package -n	%{lib_name}-devel
+%package -n	%{develname}
 Summary:	Headers for developing programs that will use paragui
 Group:		Development/C
 Requires:	%{lib_name} = %{version}
 Requires:	libexpat-devel
 Requires:	physfs-devel
-Provides:	%{lib_name_orig}-devel = %{version}-%{release}
 Provides:	%{name}-devel = %{version}-%{release}
+Obsoletes:	%{mklibname -d paragui 1.1 8} < %version-%release
 
 %description -n	%{lib_name}-devel
 This package contains the headers that programmers will need to develop
@@ -65,20 +66,21 @@ applications which will use paragui, a GUI on top of SDL.
 %patch0 -p1
 %patch1 -p1 -b .underquoted
 %patch2 -p0
-%patch3 -p0
+%patch3 -p0 -b .header
+%patch4 -p1 -b .stl
+%patch5 -p1 -b .physfs
 
 %build
 # TODO : --enable-python --enable-ruby
 aclocal
 autoconf 
 automake --foreign
-%configure2_5x --enable-unicode
-make
+%configure2_5x --enable-unicode --disable-static
+%make
 
 %install
 rm -rf %{buildroot}
-%makeinstall
-rm -f %{buildroot}%{_libdir}/lib%{name}.a
+%makeinstall_std
 %multiarch_binaries %{buildroot}%{_bindir}/paragui-config
 
 %if %mdkversion < 200900
@@ -96,7 +98,7 @@ rm -rf %{buildroot}
 %doc AUTHORS COPYING
 %{_libdir}/*.so.*
 
-%files -n %{lib_name}-devel
+%files -n %{develname}
 %defattr(-,root,root)
 %doc README
 %multiarch %{multiarch_bindir}/paragui-config
