@@ -57,7 +57,7 @@ Requires:	physfs-devel
 Provides:	%{name}-devel = %{version}-%{release}
 Obsoletes:	%{mklibname -d paragui 1.1 8} < %version-%release
 
-%description -n	%{lib_name}-devel
+%description -n	%{develname}
 This package contains the headers that programmers will need to develop
 applications which will use paragui, a GUI on top of SDL.
 
