@@ -1,7 +1,7 @@
 %define Docs paraguidoc-html-1.1.8
 %define	name	paragui
 %define	version	1.1.8
-%define	release	%mkrel 15
+%define	release	%mkrel 16
 
 %define lib_api 1.1
 %define lib_major 8
@@ -43,6 +43,7 @@ completely based on the Simple DirectMedia Layer (SDL).
 Summary:	Main library for paragui
 Group:		System/Libraries
 Provides:	%{name} = %{version}-%{release}
+Obsoletes:	%{mklibname paragui 1.1} < %{version}-%{release}
 
 %description -n	%{lib_name}
 This package contains the library needed to run programs dynamically
@@ -56,6 +57,7 @@ Requires:	libexpat-devel
 Requires:	physfs-devel
 Provides:	%{name}-devel = %{version}-%{release}
 Obsoletes:	%{mklibname -d paragui 1.1 8} < %version-%release
+Obsoletes:      %{mklibname -d paragui 1.1} < %{version}-%{release}
 
 %description -n	%{develname}
 This package contains the headers that programmers will need to develop
