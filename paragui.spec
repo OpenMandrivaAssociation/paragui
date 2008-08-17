@@ -1,7 +1,7 @@
 %define Docs paraguidoc-html-1.1.8
 %define	name	paragui
 %define	version	1.1.8
-%define	release	%mkrel 16
+%define	release	%mkrel 17
 
 %define lib_api 1.1
 %define lib_major 8
@@ -12,7 +12,7 @@ Name:		%{name}
 Version:	%{version}
 Release:	%{release}
 Summary:	Graphical User Interface based on SDL
-License:	LGPL
+License:	LGPLv2+
 Group:		System/Libraries
 Source0:	http://savannah.nongnu.org/download/paragui/%{name}-%{version}.tar.bz2
 Source1:        http://savannah.nongnu.org/download/paraguidoc-html-1.1.8.tar.bz2
@@ -22,7 +22,7 @@ Patch2:		paragui-1.1.8-asneeded.patch
 Patch3:		paragui-1.1.8-header.patch
 Patch4:		020_stl_map.diff
 Patch5:		paragui-1.1.8-remove-physfs.patch
-URL:		http://www.bms-austria.com/projects/paragui/
+URL:		http://www.paragui.org/
 BuildRequires:	freetype2-devel
 BuildRequires:	physfs-devel
 BuildRequires:	libSDL-devel
