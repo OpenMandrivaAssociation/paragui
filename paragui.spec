@@ -67,16 +67,15 @@ applications which will use paragui, a GUI on top of SDL.
 %setup -q -n %{name}-%{version} -a1
 %patch0 -p1
 %patch1 -p1 -b .underquoted
-%patch2 -p0
+%patch2 -p1 -b .asneeded
 %patch3 -p0 -b .header
 %patch4 -p1 -b .stl
 %patch5 -p1 -b .physfs
 
 %build
 # TODO : --enable-python --enable-ruby
-aclocal
-autoconf 
-automake --foreign
+export AUTOMAKE="automake --foreign"
+autoreconf -fi
 %configure2_5x --enable-unicode --disable-static
 %make
 
