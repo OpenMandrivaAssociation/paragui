@@ -1,0 +1,55 @@
+diff -Naur -x '*.orig' paragui-1.1.8-fix-underquoted-calls/configure.in paragui-1.1.8-asneeded/configure.in
+--- paragui-1.1.8-fix-underquoted-calls/configure.in	2009-10-02 11:50:07.000000000 +0200
++++ paragui-1.1.8-asneeded/configure.in	2009-10-02 11:50:44.000000000 +0200
+@@ -13,7 +13,6 @@
+ dnl we also need libSigC++ (yeah)
+ m4_pattern_allow(PKG_SIGC)
+ SIGC_VERSION=1.2.5
+-PKG_SIGC="sigc++-1.2"
+ 
+ dnl Set various version strings - taken gratefully from the GTk sources
+ 
+@@ -228,7 +227,7 @@
+ 
+ dnl Check for libSigC++
+ 
+-PKG_CHECK_MODULES(SIGC, $PKG_SIGC >= $SIGC_VERSION)
++PKG_CHECK_MODULES(SIGC, sigc++-1.2 >= $SIGC_VERSION)
+ AC_SUBST(SIGC_CFLAGS)
+ AC_SUBST(SIGC_LIBS)
+ 
+diff -Naur -x '*.orig' paragui-1.1.8-fix-underquoted-calls/Makefile.am paragui-1.1.8-asneeded/Makefile.am
+--- paragui-1.1.8-fix-underquoted-calls/Makefile.am	2009-10-02 11:50:07.000000000 +0200
++++ paragui-1.1.8-asneeded/Makefile.am	2009-10-02 11:50:44.000000000 +0200
+@@ -59,8 +59,6 @@
+ 	mkdir $(distdir)/lib
+ 	cp $(srcdir)/lib/README.txt $(distdir)/lib
+ 
+-install-hook:
+-	-ldconfig
+ 
+ rpm: $(PACKAGE)-$(VERSION).tar.gz
+ 	cp $(PACKAGE)-$(VERSION).tar.gz $(RPM_ROOT)
+diff -Naur -x '*.orig' paragui-1.1.8-fix-underquoted-calls/src/Makefile.am paragui-1.1.8-asneeded/src/Makefile.am
+--- paragui-1.1.8-fix-underquoted-calls/src/Makefile.am	2009-10-02 11:49:47.000000000 +0200
++++ paragui-1.1.8-asneeded/src/Makefile.am	2009-10-02 11:50:44.000000000 +0200
+@@ -11,6 +11,7 @@
+ 	-version-info $(LT_CURRENT):$(LT_REVISION):$(LT_AGE)
+ 
+ libparagui_la_LIBADD = \
++	$(FREETYPE_LIBS) \
+ 	$(SIGC_LIBS) \
+ 	$(SDL_LIBS) \
+ 	$(EXPAT_LIB) \
+diff -Naur -x '*.orig' paragui-1.1.8-fix-underquoted-calls/test/Makefile.am paragui-1.1.8-asneeded/test/Makefile.am
+--- paragui-1.1.8-fix-underquoted-calls/test/Makefile.am	2009-10-02 11:49:47.000000000 +0200
++++ paragui-1.1.8-asneeded/test/Makefile.am	2009-10-02 11:50:44.000000000 +0200
+@@ -28,8 +28,6 @@
+ 
+ LFLAGS=$(SDL_LIBS) -L../src ../src/libparagui.la $(FREETYPE_LIBS)
+ 
+-cairotest_SOURCES = cairotest.cpp
+-cairotest_LDADD = $(LFLAGS) -lcairo -lpixman
+ 
+ unicodetest_SOURCES = unicodetest.cpp
+ unicodetest_LDADD = $(LFLAGS)

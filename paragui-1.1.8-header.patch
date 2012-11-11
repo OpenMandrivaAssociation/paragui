@@ -1,0 +1,18 @@
+--- src/core/pgfilearchive.cpp.header	2004-03-13 14:45:44.000000000 +0100
++++ src/core/pgfilearchive.cpp	2008-06-21 04:09:58.000000000 +0200
+@@ -26,6 +26,7 @@
+     Status:           $State: Exp $
+ */
+ 
++#include <stddef.h>
+ #include "physfs.h"
+ #include "pgfilearchive.h"
+ #include "pgapplication.h"
+@@ -35,6 +36,7 @@
+ #include "SDL_loadso.h"
+ #include "physfsrwops.h"
+ #include <iostream>
++#include <cstring>
+ #include "paragui.h"
+ 
+ Uint32 PG_FileArchive::my_instance_count = 0;

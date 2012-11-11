@@ -1,0 +1,23 @@
+diff -Naur paragui-1.1.8/Makefile.am paragui-1.1.8.new/Makefile.am
+--- paragui-1.1.8/Makefile.am	2004-10-18 20:48:10.000000000 +0200
++++ paragui-1.1.8.new/Makefile.am	2005-12-29 11:36:02.000000000 +0100
+@@ -24,7 +24,7 @@
+ m4datadir = $(datadir)/aclocal
+ m4data_DATA = paragui.m4
+ 
+-pkgconfigdir = $(prefix)/lib/pkgconfig
++pkgconfigdir = $(libdir)/pkgconfig
+ pkgconfig_DATA = paragui.pc
+ 
+ $(PACKAGE)-$(VERSION).tar.gz: dist
+diff -Naur paragui-1.1.8/configure.in paragui-1.1.8.new/configure.in
+--- paragui-1.1.8/configure.in	2004-10-18 20:58:09.000000000 +0200
++++ paragui-1.1.8.new/configure.in	2005-12-29 11:35:50.000000000 +0100
+@@ -11,6 +11,7 @@
+ SDL_VERSION=1.2.6
+ 
+ dnl we also need libSigC++ (yeah)
++m4_pattern_allow(PKG_SIGC)
+ SIGC_VERSION=1.2.5
+ PKG_SIGC="sigc++-1.2"
+ 

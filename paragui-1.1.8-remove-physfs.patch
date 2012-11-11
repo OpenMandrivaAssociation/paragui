@@ -1,0 +1,32 @@
+--- libparagui1.1-1.1.8.orig/configure.in
++++ libparagui1.1-1.1.8/configure.in
+@@ -50,6 +50,7 @@
+ 
+ dnl Setup for automake
+ AM_INIT_AUTOMAKE(paragui, $PARAGUI_VERSION)
++AM_MAINTAINER_MODE
+ 
+ dnl Check for tools
+ 
+@@ -356,10 +357,9 @@
+     PHYSFS_LIB="./physfs/libphysfs.la"
+     PHYSFS_SUBDIR="physfs"
+     LIBPHYSFS=""
++    AC_CONFIG_SUBDIRS(src/physfs)
+ fi
+ 
+-AC_CONFIG_SUBDIRS(src/physfs)
+-
+ AC_SUBST(PHYSFS_INCLUDE)
+ AC_SUBST(PHYSFS_LIB)
+ AC_SUBST(PHYSFS_SUBDIR)
+--- libparagui1.1-1.1.8.orig/src/Makefile.am
++++ libparagui1.1-1.1.8/src/Makefile.am
+@@ -1,6 +1,6 @@
+ SUBDIRS = $(PHYSFS_SUBDIR) $(EXPAT_SUBDIR) draw font themes core widgets ystring
+ 
+-DIST_SUBDIRS = draw font themes core widgets expat physfs ystring
++DIST_SUBDIRS = draw font themes core widgets expat ystring
+ 
+ lib_LTLIBRARIES = libparagui.la
+ 
