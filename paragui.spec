@@ -1,7 +1,7 @@
 %define Docs paraguidoc-html-1.1.8
 %define	name	paragui
 %define	version	1.1.8
-%define	release	%mkrel 20
+%define	release	20
 
 %define lib_api 1.1
 %define lib_major 8
@@ -32,7 +32,6 @@ BuildRequires:	libsigc++1.2-devel
 BuildRequires:	libexpat-devel
 BuildRequires:	multiarch-utils >= 1.0.3
 BuildRequires:	automake1.8
-BuildRoot:	%{_tmppath}/%{name}-%{version}
 
 %description
 ParaGUI is a cross-platform high-level application framework and GUI
@@ -80,19 +79,8 @@ autoreconf -fi
 %make
 
 %install
-rm -rf %{buildroot}
 %makeinstall_std
 %multiarch_binaries %{buildroot}%{_bindir}/paragui-config
-
-%if %mdkversion < 200900
-%post -n %{lib_name} -p /sbin/ldconfig
-%endif
-%if %mdkversion < 200900
-%postun -n %{lib_name} -p /sbin/ldconfig
-%endif
-
-%clean
-rm -rf %{buildroot}
 
 %files -n %{lib_name}
 %defattr(-, root, root)
@@ -102,11 +90,105 @@ rm -rf %{buildroot}
 %files -n %{develname}
 %defattr(-,root,root)
 %doc README
-%multiarch %{multiarch_bindir}/paragui-config
+%{multiarch_bindir}/paragui-config
 %{_bindir}/paragui-config
 %{_includedir}/*
-%{_libdir}/*.?a
 %{_libdir}/*.so
 %{_libdir}/pkgconfig/%{name}.pc
 %{_datadir}/aclocal/*.m4
 %{_datadir}/%{name}
+
+
+%changelog
+* Fri Oct 02 2009 Guillaume Rousse <guillomovitch@mandriva.org> 1.1.8-19mdv2010.0
++ Revision: 452525
+- rediff patch 2 for fuziness
+- rebuild for new libphysfs
+
+  + Thierry Vignaud <tvignaud@mandriva.com>
+    - rebuild
+
+* Sun Aug 17 2008 Funda Wang <fundawang@mandriva.org> 1.1.8-17mdv2009.0
++ Revision: 272983
+- rebuild for new dfb
+
+* Sat Jun 21 2008 Funda Wang <fundawang@mandriva.org> 1.1.8-16mdv2009.0
++ Revision: 227678
+- Obsoletes old package name
+
+* Sat Jun 21 2008 Funda Wang <fundawang@mandriva.org> 1.1.8-15mdv2009.0
++ Revision: 227662
+- add ubuntu patch: use stl map all the time, drop physfs subdir
+- refine gcc 4.3 patch
+- add gentoo patches
+
+  + Pixel <pixel@mandriva.com>
+    - do not call ldconfig in %%post/%%postun, it is now handled by filetriggers
+
+  + Olivier Blin <oblin@mandriva.com>
+    - restore BuildRoot
+
+  + Thierry Vignaud <tvignaud@mandriva.com>
+    - kill re-definition of %%buildroot on Pixel's request
+    - fix autoconf-2.5x path
+
+* Fri Jun 08 2007 Tomasz Pawel Gajc <tpg@mandriva.org> 1.1.8-14mdv2008.0
++ Revision: 36977
+- rebuild for expat
+
+  + Herton Ronaldo Krzesinski <herton@mandriva.com.br>
+    - Rebuild with libslang2.
+
+* Sat May 26 2007 Funda Wang <fundawang@mandriva.org> 1.1.8-12mdv2008.0
++ Revision: 31416
+- Rebuild for directfb 1.0
+
+
+* Wed Mar 21 2007 Guillaume Rousse <guillomovitch@mandriva.org> 1.1.8-11mdv2007.1
++ Revision: 147155
+- fix build dependencies
+
+  + Tomasz Pawel Gajc <tpg@mandriva.org>
+    - bunzip patches
+    - rebuild
+    - Import paragui
+
+* Sat Aug 26 2006 Olivier Blin <blino@mandriva.com> 1.1.8-9mdv2007.0
+- rebuild for physfs (#24545)
+
+* Tue Aug 15 2006 Emmanuel Andry <eandry@mandriva.org> 1.1.8-8mdv2007.0
+- rebuild for physfs
+- disable parallel make to fix x86_64 compilation
+
+* Sun Jul 16 2006 Anssi Hannula <anssi@mandriva.org> 1.1.8-7mdv2007.0
+- fix buildrequires
+
+* Tue Jun 20 2006 Charles A Edwards <eslrahc@mandriva.org> 1.1.8-6mdv2007.0
+- rebuild for libpng
+- add documentation in devel pkg
+
+* Wed Jun 07 2006 Charles A Edwards <eslrahc@mandriva.org> 1.1.8-5mdv2007.0
+- enable unicode support
+
+* Tue Jan 31 2006 Per Øyvind Karlsen <pkarlsen@mandriva.com> 1.1.8-4mdk
+- fix buildrequires
+
+* Tue Jan 31 2006 Per Øyvind Karlsen <pkarlsen@mandriva.com> 1.1.8-3mdk
+- fix underquoted calls (P1)
+- %%mkrel
+
+* Thu Dec 29 2005 Guillaume Rousse <guillomovitch@mandriva.org> 1.1.8-2mdk
+- fix x86_64 build
+- spec cleanup
+
+* Fri Nov 11 2005 Michael Scherer <misc@mandriva.org> 1.1.8-1mdk
+- New release 1.1.8
+- mkrel
+- update major
+
+* Thu Jul 01 2004 Michael Scherer <misc@mandrake.org> 1.0.4-2mdk 
+- rebuild for new gcc
+- clean BuildRequires
+- remove Packager tag
+- rpmbuildupdate aware
+
