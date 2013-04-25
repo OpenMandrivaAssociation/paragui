@@ -1,7 +1,7 @@
 %define Docs paraguidoc-html-1.1.8
 %define	name	paragui
 %define	version	1.1.8
-%define	release	20
+%define	release	21
 
 %define lib_api 1.1
 %define lib_major 8
@@ -52,7 +52,7 @@ linked with paragui.
 Summary:	Headers for developing programs that will use paragui
 Group:		Development/C
 Requires:	%{lib_name} = %{version}
-Requires:	libexpat-devel
+Requires:	pkgconfig(expat)
 Requires:	physfs-devel
 Provides:	%{name}-devel = %{version}-%{release}
 Obsoletes:	%{mklibname -d paragui 1.1 8} < %version-%release
