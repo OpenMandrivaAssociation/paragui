@@ -23,13 +23,13 @@ Patch3:		paragui-1.1.8-header.patch
 Patch4:		020_stl_map.diff
 Patch5:		paragui-1.1.8-remove-physfs.patch
 URL:		http://www.paragui.org/
-BuildRequires:	freetype2-devel
+BuildRequires:	pkgconfig(freetype2)
 BuildRequires:	physfs-devel
-BuildRequires:	libSDL-devel
-BuildRequires:	libSDL_image-devel
+BuildRequires:	pkgconfig(sdl)
+BuildRequires:	pkgconfig(SDL_image)
 BuildRequires:	libgii-devel
-BuildRequires:	libsigc++1.2-devel
-BuildRequires:	libexpat-devel
+BuildRequires:	pkgconfig(sigc++-2.0)
+BuildRequires:	pkgconfig(expat)
 BuildRequires:	multiarch-utils >= 1.0.3
 BuildRequires:	automake1.8
 
