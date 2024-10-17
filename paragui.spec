@@ -22,7 +22,7 @@ Patch2:		paragui-1.1.8-asneeded.patch
 Patch3:		paragui-1.1.8-header.patch
 Patch4:		020_stl_map.diff
 Patch5:		paragui-1.1.8-remove-physfs.patch
-URL:		http://www.paragui.org/
+URL:		https://www.paragui.org/
 BuildRequires:	pkgconfig(freetype2)
 BuildRequires:	physfs-devel
 BuildRequires:	pkgconfig(sdl)
